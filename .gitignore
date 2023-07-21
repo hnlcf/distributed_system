@@ -1,0 +1,13 @@
+.elixir_ls/
+_build/
+.fetch/
+deps/
+doc/
+tmp/
+
+*.ez
+*-*.tar
+erl_crash.dump
+
+.vscode
+*.sublime-*
