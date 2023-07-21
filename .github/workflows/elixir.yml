@@ -14,6 +14,8 @@ jobs:
 
     name: Build and test
     runs-on: ubuntu-latest
+    strategy:
+      matrix: { dir: ['mapreduce'] }
 
     steps:
     - uses: actions/checkout@v3
@@ -31,6 +33,8 @@ jobs:
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
+      working-directory: ${{ matrix.dir }}
       run: mix deps.get
     - name: Run tests
+      working-directory: ${{ matrix.dir }}
       run: mix test
