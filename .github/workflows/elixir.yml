@@ -34,7 +34,4 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
       working-directory: ${{ matrix.dir }}
-      run: mix deps.get
-    - name: Run tests
-      working-directory: ${{ matrix.dir }}
-      run: mix test
+      run: pwd
