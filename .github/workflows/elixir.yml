@@ -19,8 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      with:
-        path: 'mapreduce'
     - name: Set up Elixir
       uses: erlef/setup-beam@61e01a43a562a89bfc54c7f9a378ff67b03e4a21 # v1.16.0
       with:
@@ -34,4 +32,4 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
       working-directory: ${{ matrix.dir }}
-      run: pwd && mix deps.get
+      run: mix deps.get
