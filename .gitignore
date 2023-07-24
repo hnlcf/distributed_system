@@ -4,6 +4,7 @@ _build/
 deps/
 doc/
 tmp/
+example/
 
 *.ez
 *-*.tar
