@@ -3,9 +3,21 @@ defmodule MapReduce do
   Documentation for `MapReduce`.
   """
 
-  def map(s) do
-    s
-    |> String.split([" ", "\n", "\t", ","])
+  def run(path) do
+    result =
+      path
+      |> File.read!()
+      |> map()
+      |> reduce()
+      |> Enum.map(fn {k, v} -> "#{k} #{v}" end)
+      |> Enum.join("\n")
+
+    File.write!("example/output.txt", result)
+  end
+
+  def map(string) do
+    string
+    |> String.split([" ", ", ", "\t", "\n"], trim: true)
     |> Enum.filter(fn w -> String.length(w) != 0 end)
     |> Enum.map(fn w -> {w, 1} end)
   end
@@ -27,7 +39,8 @@ defmodule MapReduce do
     sum =
       list
       |> Enum.filter(fn {k, _v} -> k == key end)
-      |> List.foldl(0, fn {_k, v}, acc -> acc + v end)
+      |> Enum.map(fn {_k, v} -> v end)
+      |> Enum.sum()
 
     {key, sum}
   end
