@@ -41,7 +41,6 @@ defmodule MapReduce do
     |> Enum.map(fn {k, _v} -> k end)
     |> Enum.uniq()
     |> Enum.sort()
-    |> Enum.dedup()
   end
 
   defp reduce_by_key(key, list) do
