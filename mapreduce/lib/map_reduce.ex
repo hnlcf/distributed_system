@@ -3,6 +3,10 @@ defmodule MapReduce do
   Documentation for `MapReduce`.
   """
 
+  defmodule Entry do
+    defstruct word: "", num: 0
+  end
+
   def run(path) do
     result =
       path
@@ -12,12 +16,15 @@ defmodule MapReduce do
       |> Enum.map(fn {k, v} -> "#{k} #{v}" end)
       |> Enum.join("\n")
 
-    File.write!("example/output.txt", result)
+    File.write("output.txt", result)
   end
 
+  @doc """
+  Split the input string `string` by word, return a list where each element is the `{word, 1}`.
+  """
   def map(string) do
     string
-    |> String.split([" ", ", ", "\t", "\n"], trim: true)
+    |> String.split([" ", "\n", "\t", ","], trim: true)
     |> Enum.filter(fn w -> String.length(w) != 0 end)
     |> Enum.map(fn w -> {w, 1} end)
   end
