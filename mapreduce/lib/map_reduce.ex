@@ -20,7 +20,8 @@ defmodule MapReduce do
   end
 
   @doc """
-  Split the input string `string` by word, return a list where each element is the `{word, 1}`.
+  Split the input string `string` by word, return a list where each element is
+  the `{word, 1}`.
   """
   def map(string) do
     string
@@ -38,6 +39,7 @@ defmodule MapReduce do
   defp get_keys(list) do
     list
     |> Enum.map(fn {k, _v} -> k end)
+    |> Enum.uniq()
     |> Enum.sort()
     |> Enum.dedup()
   end
